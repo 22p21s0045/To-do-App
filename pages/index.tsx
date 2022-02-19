@@ -1,13 +1,12 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
 import Navbar from '../components/Navbar'
-import styles from '../styles/Home.module.css'
+import Welcome from '../components/Welcome'
 
 const Home: NextPage = () => {
   return (
     <div>
       <Navbar/>
+      <Welcome/>
     </div>
   )
 }
