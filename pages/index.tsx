@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Background from '../components/Background'
 import Navbar from '../components/Navbar'
 import Welcome from '../components/Welcome'
 
@@ -7,6 +8,7 @@ const Home: NextPage = () => {
     <div>
       <Navbar/>
       <Welcome/>
+      <Background/>
     </div>
   )
 }
