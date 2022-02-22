@@ -14,3 +14,24 @@ a {
 * {
   box-sizing: border-box;
 }
+.Welcome {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 60px;
+  text-align: center;
+  
+}
+.Backgrounds{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+
+  z-index: -1;
+}
+.Fill{
+ width: 464px;
+ height: 800px;
+  background-color: #f5f5f5;
+  border-radius: 10px/20px;
+}
