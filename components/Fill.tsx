@@ -12,6 +12,8 @@ function Fill() {
     settag(event.target.value as string);
   };
   const [date, setdate] = useState<string | string[]>();
+  const sent = [message,tag,date]
+  console.log(sent)
   return (
     <div>
       <Grid align="center">
