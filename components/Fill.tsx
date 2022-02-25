@@ -4,7 +4,17 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
+import {supabase} from "../components/supabase";
 import { useState } from "react";
+//TODO: ADD foreign key to the database
+async function Submit() {
+  const { data, error } = await supabase
+  .from('Show')
+  .insert([
+    { some_column: 'someValue', other_column: 'otherValue' },
+  ])
+
+}
 function Fill() {
   const [message, setmessage] = useState("");
   const [tag, settag] = useState("");
