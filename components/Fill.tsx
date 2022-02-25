@@ -6,16 +6,19 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import {supabase} from "../components/supabase";
 import { useState } from "react";
-//TODO: ADD foreign key to the database
-async function Submit() {
-  const { data, error } = await supabase
-  .from('Show')
-  .insert([
-    { some_column: 'someValue', other_column: 'otherValue' },
-  ])
+import {useSession} from "next-auth/react";
 
-}
+
 function Fill() {
+  async function Submit() {
+    const { data, error } = await supabase
+    .from('Show')
+    .insert([
+      { UserName: session?.user?.name, Message:message ,Tag:tag},
+    ])
+  
+  }
+  const { data: session } = useSession();
   const [message, setmessage] = useState("");
   const [tag, settag] = useState("");
   const handleTag = (event: SelectChangeEvent) => {
@@ -67,7 +70,7 @@ function Fill() {
           <h3>{tag}</h3>
           <h3>{date}</h3>
           <div style={{ paddingTop: 50 }}>
-            <Button label="Submit" />
+            <Button label="Submit" onClick ={()=>Submit()} />
             <Button label="Clear" />
           </div>
         </Box>
