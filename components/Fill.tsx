@@ -16,6 +16,12 @@ function Fill() {
     .insert([
       { UserName: session?.user?.name, Message:message ,Tag:tag},
     ])
+    if (error) {
+      alert(error.message);
+    }
+    else{
+      alert("Success");
+    }
   
   }
   const { data: session } = useSession();
