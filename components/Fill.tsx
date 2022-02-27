@@ -2,6 +2,7 @@ import React from "react";
 import { TextInput, Box, Grid, Button, Calendar } from "grommet";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Alerts from "../components/Alerts";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import {supabase} from "../components/supabase";
@@ -17,10 +18,12 @@ function Fill() {
       { UserName: session?.user?.name, Message:message ,Tag:tag},
     ])
     if (error) {
-      alert(error.message);
+      alert("Error"+error.message);
+      <Alerts status="error" message={error.message} />;
     }
     else{
       alert("Success");
+      <Alerts status="success" message="Success" />;
     }
   
   }
@@ -76,6 +79,7 @@ function Fill() {
           <h3>{tag}</h3>
           <h3>{date}</h3>
           <div style={{ paddingTop: 50 }}>
+            <Alerts />
             <Button label="Submit" onClick ={()=>Submit()} />
             <Button label="Clear" />
           </div>
