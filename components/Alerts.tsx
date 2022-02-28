@@ -8,7 +8,9 @@ function Alerts(props: any) {
   useEffect(() => {
     setStatus(props.status);
     setMessage(props.message);
+    console.log(props)
   }, [props.status, props.message]);
+  console.log(props);
   return (
     <div >
       <Alert severity={Status}>{Message} </Alert>

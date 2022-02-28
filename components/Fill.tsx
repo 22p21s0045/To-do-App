@@ -12,6 +12,8 @@ import {useSession} from "next-auth/react";
 
 function Fill() {
   async function Submit() {
+    const statusSuccess:string = "success";
+    const statusError:string = "error";
     const { data, error } = await supabase
     .from('Show')
     .insert([
@@ -19,15 +21,20 @@ function Fill() {
     ])
     if (error) {
       alert("Error"+error.message);
-      <Alerts status="error" message={error.message} />;
+      setStatus(["error",error.message]);
+      <Alerts key = {Status} status={statusError} message={error.message} />;
     }
     else{
+      setStatus(["success","Successfully submitted"]);
       alert("Success");
-      <Alerts status="success" message="Success" />;
+      <Alerts key = {Status}status={statusSuccess} message="Success" />;
+      
+      
     }
   
   }
   const { data: session } = useSession();
+  const [Status, setStatus] = useState <string[]|undefined[]>(["info","Ready for submit 🐱"]);
   const [message, setmessage] = useState("");
   const [tag, settag] = useState("");
   const handleTag = (event: SelectChangeEvent) => {
@@ -79,7 +86,7 @@ function Fill() {
           <h3>{tag}</h3>
           <h3>{date}</h3>
           <div style={{ paddingTop: 50 }}>
-            <Alerts />
+            <Alerts status={Status[0]} message ={Status[1]}/>
             <Button label="Submit" onClick ={()=>Submit()} />
             <Button label="Clear" />
           </div>
