@@ -8,7 +8,7 @@ import InputLabel from "@mui/material/InputLabel";
 import {supabase} from "../components/supabase";
 import { useState } from "react";
 import {useSession} from "next-auth/react";
-
+import Table from './Tables'
 
 function Fill() {
   async function Submit() {
@@ -90,6 +90,7 @@ function Fill() {
             <Button label="Submit" onClick ={()=>Submit()} />
             <Button label="Clear" />
           </div>
+          <Table/>
         </Box>
       </Grid>
     </div>

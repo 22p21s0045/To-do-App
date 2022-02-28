@@ -1,3 +1,4 @@
+
 import type { NextPage } from 'next'
 import Background from '../components/Background'
 import Fill from '../components/Fill'
@@ -11,6 +12,7 @@ const Home: NextPage = () => {
       <Welcome/>
       <Background/>
       <Fill/>
+      
     </div>
   )
 }
