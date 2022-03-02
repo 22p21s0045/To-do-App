@@ -10,9 +10,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { TablePagination } from '@mui/material';
+import { TablePagination } from "@mui/material";
 import { useEffect, useState } from "react";
-
+import { useSession } from "next-auth/react";
 function Tables() {
   interface Types {
     UserName: string;
@@ -21,18 +21,24 @@ function Tables() {
     created_at: string;
   }
   async function fetch() {
-    const { data, error } = await supabase.from("Show").select();
+    const { data, error } = await supabase
+      .from("Show")
+      .select()
+      .eq("UserName", `${session?.user?.name}`)
+      
+      console.log(data);
+    // This is the user's name;
     setdata(data);
   }
-
-  const [data, setdata] = useState<Types | null | string[]>([""]);
+  const { data: session } = useSession();
+  const [data, setdata] = useState<Types | null | Array<string>>([""]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   useEffect(() => {
     fetch();
   }, []);
   return (
-    <div className ="Table">
+    <div className="Table">
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -44,7 +50,7 @@ function Tables() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data!
+            {data?
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row: any) => (
                 <TableRow key={row.id}>
@@ -59,14 +65,13 @@ function Tables() {
           </TableBody>
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
-            page ={page}
+            page={page}
             rowsPerPage={rowsPerPage}
-            count={data!.length}
-           onPageChange={(event, newPage) => {
+            count={data?.length}
+            onPageChange={(event, newPage) => {
               setPage(newPage);
             }}
-            />
-
+          />
         </Table>
       </TableContainer>
     </div>
